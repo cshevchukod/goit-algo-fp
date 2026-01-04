@@ -1,4 +1,4 @@
-# task3.py - Завдання 3
+# task4.py - Завдання 4
 
 import uuid
 
@@ -48,7 +48,6 @@ def draw_tree(tree_root):
 
 
 def build_heap_tree(heap_array):
-
     if not heap_array:
         return None
 
@@ -67,7 +66,6 @@ def build_heap_tree(heap_array):
 
 
 def visualize_heap(heap_array):
-
     root = build_heap_tree(heap_array)
     if root is None:
         print("Купа порожня.")
@@ -76,7 +74,6 @@ def visualize_heap(heap_array):
 
 
 if __name__ == "__main__":
-    # Приклад: мін-купа (можна підставити свій масив купи)
-    heap = [1, 3, 2, 7, 6, 4, 5]
 
+    heap = [0, 4, 1, 5, 10, 3]
     visualize_heap(heap)
