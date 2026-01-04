@@ -10,13 +10,11 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    # вставка на початок
     def insert_at_beginning(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
 
-    # вставка в кінець
     def insert_at_end(self, data):
         new_node = Node(data)
         if self.head is None:
@@ -28,7 +26,6 @@ class LinkedList:
             cur = cur.next
         cur.next = new_node
 
-    # Перевірка
     def print_list(self):
         cur = self.head
         while cur is not None:
@@ -62,8 +59,8 @@ class LinkedList:
 
         self.head = sorted_head
 
+    # Допоміжна функція для insertion sort:
     def _sorted_insert(self, sorted_head, node):
-        # вставка node у відсортований ланцюжок sorted_head
         if sorted_head is None or node.data <= sorted_head.data:
             node.next = sorted_head
             return node
@@ -76,11 +73,10 @@ class LinkedList:
         cur.next = node
         return sorted_head
 
-    # 3) Об'єднання двох відсортованих списків
-    @staticmethod
-    def merge_sorted(list_a, list_b):
-        a = list_a.head
-        b = list_b.head
+    # 3) Злиття двох відсортованих списків
+    def merge_sorted_with(self, other):
+        a = self.head
+        b = other.head
 
         merged = LinkedList()
 
@@ -91,7 +87,6 @@ class LinkedList:
             merged.head = a
             return merged
 
-        # вибираємо перший елемент
         if a.data <= b.data:
             merged.head = a
             a = a.next
@@ -99,7 +94,7 @@ class LinkedList:
             merged.head = b
             b = b.next
 
-        tail = merged.head
+        tail = merged.head  # хвіст нового списку
 
         while a is not None and b is not None:
             if a.data <= b.data:
@@ -110,13 +105,12 @@ class LinkedList:
                 b = b.next
             tail = tail.next
 
-        # додаємо хвіст
         tail.next = a if a is not None else b
         return merged
 
 
 if __name__ == "__main__":
-    # Реверс
+
     l1 = LinkedList()
     for x in [4, 2, 5, 1, 3]:
         l1.insert_at_end(x)
@@ -128,12 +122,10 @@ if __name__ == "__main__":
     print("\nПісля реверсу:")
     l1.print_list()
 
-    # Сортування
     l1.insertion_sort()
     print("\nПісля сортування вставками:")
     l1.print_list()
 
-    # Злиття двох ВЖЕ відсортованих
     a = LinkedList()
     for x in [1, 3, 5, 7]:
         a.insert_at_end(x)
@@ -142,6 +134,6 @@ if __name__ == "__main__":
     for x in [2, 4, 6, 8]:
         b.insert_at_end(x)
 
-    merged = LinkedList.merge_sorted(a, b)
+    merged = a.merge_sorted_with(b)
     print("\nЗлиття двох відсортованих списків:")
     merged.print_list()
